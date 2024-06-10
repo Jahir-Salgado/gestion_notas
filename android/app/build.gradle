@@ -1,0 +1,80 @@
+plugins {
+    // Plugins para Android y Flutter
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+
+    // Aplicamos el plugin de servicios de Google, pero lo desactivamos
+    id("com.google.gms.google-services") version "4.4.2" apply false
+}
+
+// Importamos el archivo local.properties
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+// Obtenemos el versionCode y versionName de Flutter
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode') ?: '1'
+def flutterVersionName = localProperties.getProperty('flutter.versionName') ?: '1.0'
+
+android {
+    namespace "com.example.flutter_gestion_notas"
+    compileSdk flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        // Configuración de la aplicación
+        applicationId "com.example.flutter_gestion_notas"
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+    }
+
+    buildTypes {
+        release {
+            // Configuración para el lanzamiento
+            signingConfig signingConfigs.debug // Por ahora usamos las llaves de depuración
+        }
+    }
+}
+
+flutter {
+    source '../..' // Ubicación del proyecto Flutter
+}
+
+dependencies {
+    // Aquí irán las dependencias de tu proyecto
+}
+
+// Configuración específica de Firebase
+dependencies {
+    // Importamos el Firebase BoM (Bill of Materials)
+    implementation platform("com.google.firebase:firebase-bom:33.1.0")
+
+    // Dependencia para Firebase Analytics
+    implementation("com.google.firebase:firebase-analytics")
+
+    // Agrega aquí las dependencias de otros productos Firebase que desees utilizar
+    // Por ejemplo:
+    // implementation("com.google.firebase:firebase-auth")
+    // implementation("com.google.firebase:firebase-firestore")
+    // ...
+}

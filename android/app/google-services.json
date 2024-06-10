@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "470502864095",
+    "project_id": "gestionnotas-79332",
+    "storage_bucket": "gestionnotas-79332.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470502864095:android:0bf178c1b7494575bba56a",
+        "android_client_info": {
+          "package_name": "com.example.flutter_gestion_notas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx_IsJHxPxEt91YBBTPznvAubac8zivzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
